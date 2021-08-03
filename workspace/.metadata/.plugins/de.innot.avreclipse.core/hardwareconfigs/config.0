@@ -1,0 +1,24 @@
+#Hardware Configuration File
+#Tue Aug 04 11:41:24 CLT 2015
+avreclipse.avrdude.useconsole=true
+bitsBefore=0
+gdbservertool=NONE
+unitsBefore=0
+usbdelay=
+port=
+mcu=atmega16
+bitbangdelay=
+hostinterface=SERIAL
+avreclipse.avrdude.verbosity=0
+fcpu=1000000
+bitsAfter=0
+jtagclock=0
+description=
+programmer=stk500v2
+unitsAfter=0
+avreclipse.avrdude.command=avrdude
+programmertool=avreclipse.avrdude
+jtagdaisychain=false
+baud=
+exitspec=
+name=New target

@@ -1,0 +1,15 @@
+//The setup function is called once at startup of the sketch
+#include "SensorBmp183.h"
+SensorBmp183* myBaro;
+void setup()
+{
+// Add your initialization code here
+	 myBaro= (SensorBmp183)new SensorBmp183();
+}
+
+// The loop function is called in an endless loop
+void loop()
+{
+//Add your repeated code here
+	myBaro->getData();
+}

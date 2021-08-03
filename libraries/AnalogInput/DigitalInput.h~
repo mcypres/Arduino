@@ -1,0 +1,15 @@
+#include "Arduino.h"
+
+#define TIME_OUT 1500
+
+class DigitalInput {
+private:
+	int * mPortList;
+	long * mTimeout;
+	int mNbPort; 
+public:
+	DigitalInput(int nbPort,int * portList,float vRef);
+	void refresh();
+	String read();
+	~DigitalOutput();
+};

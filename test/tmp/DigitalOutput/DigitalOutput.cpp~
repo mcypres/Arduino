@@ -1,0 +1,74 @@
+/*
+ * DigitalOutput.cpp
+ *
+ *  Created on: 14 juin 2016
+ *      Author: marc
+ */
+
+#include "DigitalOutput.h"
+
+namespace DigitalOutput {
+
+DigitalOutput::DigitalOutput(int size,int[] ports,long [] delay) {
+	mSize=size;
+	mPort=port;
+	mDelay=delay;
+	mTimeout=new long(mSize);
+	for(int  i=0;i<mSize;i++){
+	  pinMode(relais[i], OUTPUT);
+	  timeout[i]=0;
+	  digitalWrite(relais[i], HIGH);
+	}
+}
+
+void DigitalOutput::decodeMsg(char * msg){
+	int cmd=0;
+	mScanMsgPos=0;
+	do{
+		cmd=getCommand(msg);
+		if (cmd>0 && cmd<9){
+			cmd--;
+		    digitalWrite(mPort[cmd],LOW);
+		    timeout[rep]=millis()+TIME_OUT;
+		    Serial.print("at : ");
+		    Serial.print(millis());
+		    Serial.print("  relais ");
+		    Serial.print(mPort[cmd]);
+		    Serial.println(" HIGH");
+
+		  }
+		 if (cmd<0 && cmd>-9){
+			 cmd=-cmd-1;
+		     digitalWrite(mPort[rep], HIGH);
+		     Serial.print("at : ");
+		     Serial.print(millis());
+		     Serial.print("  relais ");
+		     Serial.print(mPort[cmd]);
+		     Serial.println(" LOW");
+		  }
+	}while(cmd!=0);
+
+}
+void DigitalOutput::loop(){
+	for(int  i=0;mSize;i++){
+		if (mTimeout[i]<millis()&&mTimeout[i]!=0){
+		      digitalWrite(mPort[i], HIGH);
+		      Serial.print("at : ");
+		       Serial.print(millis());
+		      Serial.print("  relais ");
+		      Serial.print(mPort[i]);
+		      Serial.println(" LOW");
+		      mTimeout[i]=0;
+		    }
+	}
+}
+int DigitalOutput::getCommand(char * msg){
+
+}
+DigitalOutput::~DigitalOutput() {
+	if (mTimeout!=NULL) delete mTimeout;
+}
+
+
+
+} /* namespace DigitalOutput */

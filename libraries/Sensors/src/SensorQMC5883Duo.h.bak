@@ -1,0 +1,48 @@
+/*
+ * SensorQMC5883Duo.h
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#ifndef SensorQMC5883Duo_H_
+#define SensorQMC5883Duo_H_
+
+#include "Sensor.h"
+#include "SensorQMC5883.h"
+#include "tca.h"
+
+class SensorQMC5883Duo: public Sensor{
+public:
+	SensorQMC5883Duo(HardwareSerial *ptOutputSer,
+					Logger *myLogger,
+					float declinationAngleDegres,
+					float declinationAnglemin,
+					int id,
+					float xOffset=0,
+					float yOffset=0,
+					float zOffset=0,
+					float speedCoef=1
+					);
+	float getHeadingDegrees();
+	char* eepromParamtoString();
+	String getSensor2Detail();
+	sensors_event_t  getEvent2();
+	String toString();
+	char* toNmea();
+	void getData();
+
+	~SensorQMC5883Duo();
+protected:
+	SensorQMC5883 * mag0, *mag1;	
+	sensors_event_t  event0,event1;
+	float magnetudexy,magnetude;
+	float declinationAngle ;
+	float headingDegrees;
+	float heading;
+	float speed;
+	float xOffset, yOffset,zOffset,speedCoef;
+
+};
+
+#endif

@@ -1,0 +1,32 @@
+#include <AsyncrSerial.h>
+
+AsyncrSerial::AsyncrSerial(HardwareSerial* serPort,Logger* myLogger){
+	ptSerPort=serPort;
+	isValidData=false;
+	this->myLogger=myLogger;
+}
+String * AsyncrSerial::getMessage(){
+	if(isValidData){
+		isValidData=false;
+		inputBuff = "";
+	}
+	if (ptSerPort->available() > 0) {
+		_LOG_PRINT(V,F("recu data"),"");
+		// get the new byte:
+		char inChar = (char)ptSerPort->read();
+		// add it to the msgin:
+		inputBuff += inChar;
+		 _LOG_PRINT(V,F("inputBuff = "),inputBuff);
+		if (inChar == '\n' && inputBuff.length() > 0) {
+			isValidData=true;
+      		return &inputBuff;
+		}
+    }
+    return NULL;
+}
+
+
+bool AsyncrSerial::GetIsValidData(){
+
+	return isValidData;
+}

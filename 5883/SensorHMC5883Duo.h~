@@ -1,0 +1,34 @@
+/*
+ * SensorHMC5883Duo.h
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#ifndef SensorHMC5883Duo_H_
+#define SensorHMC5883Duo_H_
+
+#include "SensorHMC5883.h"
+
+class SensorHMC5883Duo: public SensorHMC5883 {
+	public:
+	SensorHMC5883Duo(HardwareSerial *ptOutputSer,
+					Logger *myLogger,
+					float declinationAngleDegres,
+					float declinationAnglemin,
+					int id,
+					float xOffset=0,
+					float yOffset=0,
+					float zOffset=0,
+					float speedCoef=1
+					);	
+	float getHeadingDegrees();
+	void getData();
+	char* eepromParamtoString();
+protected:
+	Adafruit_HMC5883_Unified mag2;	
+	sensors_event_t event2;
+	
+};
+
+#endif

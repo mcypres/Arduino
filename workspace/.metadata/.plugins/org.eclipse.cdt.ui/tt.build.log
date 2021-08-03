@@ -1,0 +1,27 @@
+11:45:29 **** Incremental Build of configuration Release for project tt ****
+make all 
+Building target: tt
+Printing size:
+"/home/marc/workspace/arduino/arduino-1.6.4/hardware/tools/avr/bin/avr-size" -A "/home/marc/Arduino/workspace/tt/Release/tt.elf"
+/home/marc/Arduino/workspace/tt/Release/tt.elf  :
+section           size      addr
+.data               28   8389120
+.text             2072         0
+.bss               166   8389148
+.comment            17         0
+.debug_aranges     632         0
+.debug_info      25400         0
+.debug_abbrev     3975         0
+.debug_line       4296         0
+.debug_frame      1812         0
+.debug_str        6417         0
+.debug_loc       10028         0
+.debug_ranges      624         0
+Total            55467
+
+
+Finished building target: tt
+ 
+
+11:45:29 Build Finished (took 148ms)
+

@@ -1,0 +1,24 @@
+/*
+ * Sensor.h
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#ifndef SENSOR_H_
+#define SENSOR_H_
+
+class Sensor {
+protected:
+	Sensor();
+	String ToString()=0;
+	String ToNmea()=0;
+	void getData()=0;
+	virtual ~Sensor();
+	String Name;
+public:
+	String getName();
+
+};
+
+#endif /* SENSOR_H_ */

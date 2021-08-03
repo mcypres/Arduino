@@ -1,0 +1,22 @@
+/*
+ * A.h
+ *
+ *  Created on: 4 août 2015
+ *      Author: marc
+ */
+
+#ifndef A_H_
+#define A_H_
+
+namespace sensors {
+
+class A {
+public:
+	A();
+	 static void checksum(unsigned char* ptr,char* ptChk,int msgLength);
+	virtual ~A();
+};
+
+} /* namespace sensors */
+
+#endif /* A_H_ */

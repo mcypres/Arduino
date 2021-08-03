@@ -1,0 +1,71 @@
+/*
+ * SensorHMC5883Duo.cpp
+ *
+ *  Created on: 04 aout. 2019
+ *      Author: marc
+ */
+
+#include "SensorHMC5883Duo.h"
+//#include "SensorHMC5883.h"
+
+SensorHMC5883Duo::SensorHMC5883Duo(HardwareSerial *ptOutputSer,
+							Logger *myLogger,
+							float declinationAngleDegres,
+							float declinationAnglemin,
+							int id,
+							float xOffset,
+							float yOffset,
+							float zOffset,
+							float speedCoef
+							) :SensorHMC5883(ptOutputSer,myLogger,
+											declinationAngleDegres,
+											declinationAnglemin,
+											id,
+											xOffset,
+											yOffset,
+											zOffset,
+											speedCoef
+											){
+	mag2 = Adafruit_HMC5883_Unified(id);
+	init(mag2,
+		ptOutputSer,
+		myLogger,
+		declinationAngleDegres,
+		declinationAnglemin,
+		id,
+		xOffset,
+		yOffset,
+		zOffset,
+		speedCoef
+		);
+							
+}
+ void SensorHMC5883::getData(){
+
+	_LOG_PRINT(V,"getData getEvent :","Start");
+	mag.getEvent(&event);
+	_LOG_PRINT(V,"getData getEvent :","end");
+	magnetudexy = sqrt(sq(event.magnetic.y-yOffset) + sq(event.magnetic.x-xOffset));
+  	magnetude = sqrt(sq(event.magnetic.y-yOffset) + sq(event.magnetic.x-xOffset) + sq(event.magnetic.z-zOffset));
+  	
+	heading = atan2(event.magnetic.y-yOffset, event.magnetic.x-xOffset);
+ionA
+
+
+	_LOG_PRINT(V,"getData magnetude :",(String)magnetude);
+
+	// Correct for when signs are reversed.
+	
+	if (heading < 0)
+		heading += 2 * PI;
+	// Check for wrap due to addition of declination.
+	if (heading > 2 * PI)
+    	heading -= 2 * PI;
+	// Convert radians to degrees for readability.
+  	headingDegrees = heading * 180 / M_PI;
+
+}
+
+float SensorHMC5883Duo::getHeadingDegrees(){
+	
+}

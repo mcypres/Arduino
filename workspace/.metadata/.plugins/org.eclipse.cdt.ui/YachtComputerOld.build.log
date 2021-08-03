@@ -1,0 +1,39 @@
+19:18:35 **** Incremental Build of configuration Release for project YachtComputerOld ****
+make all 
+Building file: ../Sensor.cpp
+Starting C++ compile
+"/home/marc/workspace/arduino/arduino-1.6.4/hardware/tools/avr/bin/avr-g++" -c -g -Os -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10605 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR     -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/cores/arduino" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/variants/mega" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/SoftwareSerial" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/Wire" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/Wire/utility" -I"/home/marc/Arduino/libraries/Adafruit_BMP085_Library" -MMD -MP -MF"Sensor.cpp.d" -MT"Sensor.cpp.o" -D__IN_ECLIPSE__=1 -x c++ "../Sensor.cpp"  -o  "Sensor.cpp.o"   -Wall
+Finished building: ../Sensor.cpp
+ 
+Building file: ../SensorBmp183.cpp
+Starting C++ compile
+"/home/marc/workspace/arduino/arduino-1.6.4/hardware/tools/avr/bin/avr-g++" -c -g -Os -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10605 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR     -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/cores/arduino" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/variants/mega" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/SoftwareSerial" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/Wire" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/Wire/utility" -I"/home/marc/Arduino/libraries/Adafruit_BMP085_Library" -MMD -MP -MF"SensorBmp183.cpp.d" -MT"SensorBmp183.cpp.o" -D__IN_ECLIPSE__=1 -x c++ "../SensorBmp183.cpp"  -o  "SensorBmp183.cpp.o"   -Wall
+Finished building: ../SensorBmp183.cpp
+ 
+Building file: ../YachtComputer/Sensor.cpp
+Starting C++ compile
+"/home/marc/workspace/arduino/arduino-1.6.4/hardware/tools/avr/bin/avr-g++" -c -g -Os -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10605 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR     -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/cores/arduino" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/variants/mega" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/SoftwareSerial" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/Wire" -I"/home/marc/workspace/arduino/arduino-1.6.4/hardware/arduino/avr/libraries/Wire/utility" -I"/home/marc/Arduino/libraries/Adafruit_BMP085_Library" -MMD -MP -MF"YachtComputer/Sensor.cpp.d" -MT"YachtComputer/Sensor.cpp.o" -D__IN_ECLIPSE__=1 -x c++ "../YachtComputer/Sensor.cpp"  -o  "YachtComputer/Sensor.cpp.o"   -Wall
+In file included from ../YachtComputer/Sensor.cpp:8:0:
+../YachtComputer/Sensor.h:22:10: error: 'String' does not name a type
+  virtual String toString()=0;
+          ^
+../YachtComputer/Sensor.h:23:10: error: 'String' does not name a type
+  virtual String toNmea()=0;
+          ^
+../YachtComputer/Sensor.h:27:2: error: 'String' does not name a type
+  String Name;
+  ^
+../YachtComputer/Sensor.h:29:2: error: 'String' does not name a type
+  String getName();
+  ^
+../YachtComputer/Sensor.cpp: In static member function 'static void Sensor::checksum(unsigned char*, char*, int)':
+../YachtComputer/Sensor.cpp:36:30: error: 'HEX' was not declared in this scope
+       itoa((int)checksum,tmp,HEX);
+                              ^
+../YachtComputer/Sensor.cpp:39:33: error: 'strncpy' was not declared in this scope
+       strncpy((char*)ptChk,tmp,3);
+                                 ^
+make: *** [YachtComputer/Sensor.cpp.o] Erreur 1
+
+19:18:35 Build Finished (took 388ms)
+

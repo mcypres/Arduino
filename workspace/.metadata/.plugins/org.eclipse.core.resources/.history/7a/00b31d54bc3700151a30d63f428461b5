@@ -1,0 +1,17 @@
+/*
+ * Sensor.h
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#ifndef SENSOR_H_
+#define SENSOR_H_
+
+class Sensor {
+protected:
+	Sensor();
+	virtual ~Sensor();
+};
+
+#endif /* SENSOR_H_ */

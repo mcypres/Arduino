@@ -1,0 +1,14 @@
+#ifndef ASYNCR_H
+#define ASYNCR_H
+
+class Asyncr {
+private:
+	String inputBuff="";
+	HardwareSerial* serPort;
+	bool isValidData;
+public:
+	Asyncr(HardwareSerial* serPort);
+	String * getMessage();
+	bool isValidData();
+};
+#endif

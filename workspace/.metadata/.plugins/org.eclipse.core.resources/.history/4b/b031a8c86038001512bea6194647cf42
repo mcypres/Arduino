@@ -1,0 +1,21 @@
+/*
+ * Sensor.h
+ *
+ *  Created on: 1 août 2015
+ *      Author: marc
+ */
+
+#ifndef SENSOR_H_
+#define SENSOR_H_
+
+namespace sensors {
+
+class Sensor {
+public:
+	Sensor();
+	virtual ~Sensor();
+};
+
+} /* namespace sensors */
+
+#endif /* SENSOR_H_ */

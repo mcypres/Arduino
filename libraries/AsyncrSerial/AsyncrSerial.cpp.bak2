@@ -1,0 +1,58 @@
+#include <AsyncrSerial.h>
+#undef NO_LOG
+
+//$GPRMC,174524.00,A,3952.16502,S,07310.73395,W,0.019,,141020,,,A*73
+//$GPRMC,174804.00,A,3952.16607,S,07310.73321,W,0.017,,141020,,,A$
+AsyncrSerial::AsyncrSerial(HardwareSerial* serPort,Logger* myLogger){
+	ptSerPort=serPort;
+	isValidData=false;
+	this->myLogger=myLogger;
+	buffPos=0;
+	for (int i;i<INPUT_BUFF_SIZE;i++){	
+		inputBuff[i]='\0';
+	}
+	
+}
+char* AsyncrSerial::getMessage(){
+	if(isValidData){
+		isValidData=false;
+	}
+	if (ptSerPort->available() > 0) _LOG_PRINT(M,F("getMessage start buffPos = "),buffPos);
+	while (ptSerPort->available() > 0) {
+		//_LOG_PRINT(M,F("recu data "),"");
+		// get the new byte:
+		//char inChar = (char)ptSerPort->read();
+		inputBuff[buffPos] = (char)ptSerPort->read();
+		// add it to the msgin:
+		//inputBuff[buffPos]= inChar;
+		//inputBuff[buffPos+1]= '\0';
+		//if (inChar == '\n' && buffPos > 0) {
+		if (inputBuff[buffPos] == '*') {
+			_LOG_PRINT(M,F(" found lf inputBuff = "),inputBuff);
+			if (buffPos > 0){
+			
+				isValidData=true;
+				inputBuff[buffPos+1]='\0';
+				buffPos=0;
+		  		return inputBuff;
+		  	}
+		  	return NULL;
+		}
+		if(buffPos>=INPUT_BUFF_SIZE-3){
+			_LOG_PRINT(M,F(" inputBuff  0verflow :"),inputBuff);
+			buffPos=0;
+			return NULL;
+		}
+			
+	buffPos++;		
+    }
+    
+	_LOG_PRINT(M,F("inputBuff = "),inputBuff);
+    return NULL;
+}
+
+
+bool AsyncrSerial::GetIsValidData(){
+
+	return isValidData;
+}

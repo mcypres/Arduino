@@ -1,0 +1,31 @@
+/*
+ * SensorBmp183.cpp
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#include "SensorBmp183.h"
+#include <Adafruit_BMP085.h>
+SensorBmp183::SensorBmp183() {
+	if (!bmp.begin()) {
+		Serial.println("Could not find a valid BMP085 sensor, check wiring!");
+		while (1) {}
+	  }
+
+}
+String SensorBmp183::ToString(){
+	return "";
+}
+String SensorBmp183::ToNmea(){
+	return "";
+}
+void SensorBmp183::getData(){
+	if (lastTime +BARO_TIME_INTERVAL < millis()){
+	        lastTime =millis();
+}
+
+SensorBmp183::~SensorBmp183() {
+	// TODO Auto-generated destructor stub
+}
+

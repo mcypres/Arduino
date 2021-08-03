@@ -1,0 +1,35 @@
+	public: void decoder::decodeCommande(String msg){
+	int startPos=0;
+	int endPos=0;
+	for(int i=0; i<3;i++){
+		endPos=msg.indexOf(SEP,startPos);
+		if(endPos<0){
+			endPos=msg.length();
+		} 
+		Serial.print("msg.substring(");
+		Serial.print(startPos);
+		Serial.print(",");
+		Serial.println(endPos);
+		Serial.println(") = ");
+		Serial.println(msg.substring(startPos,endPos));          
+		eepromBuff.vect[i]=msg.substring(startPos,endPos).toFloat();
+		startPos=endPos+1;
+	}
+	myEepromSrtream.writeEewriprom( &eepromBuff);
+	Serial.println(toString());
+
+
+	/**************************************************/
+	String decoder::toString( EepromBuff* in){
+	  String rep="";
+	  rep +="\n x= " +String(in->ini.x);
+	  rep +="\t y= " +String(in->ini.y);
+	  rep +="\t z= "+String(in->ini.z);
+	  return rep;
+	}
+	/**************************************************/
+	String decoder::toString(){
+	  EepromBuff in= myEepromSrtreamreadEeprom();
+	  Serial.println(toString(&in));
+	  return toString(&in);
+	}

@@ -1,0 +1,129 @@
+#include"Logger.h" 
+
+	Logger::Logger(HardwareSerial* ptLogSer,char* machinName,LevelValue level){																																																	
+		this->ptLogSer=ptLogSer;
+		mMachineName=machinName;
+		mRequieredLevel=level;
+		//ptLogSer->println("logger onstructeur argument");
+		//this->ptLogSer->println("logger onstructeur");
+		
+	}
+	
+/*
+	void Logger::printLog(LevelValue level,char* sender,char* title,const __FlashStringHelper *value){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(*value);
+			ptLogSer->print(tail);
+		}*/
+		//int level,char* sender,char* title, String &value
+
+	void Logger::printLog(LevelValue level,const char sender[],const int lineNb,const char title[],const char tail[],const String &value){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value);
+			ptLogSer->print(tail);
+		}
+	}
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],const char* value){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print( value);
+			ptLogSer->print(tail);
+		}
+	}
+
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],char value){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value);
+			ptLogSer->print(tail);
+		}
+	}
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],unsigned char value, int type ){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],int value, int type){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+		
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],unsigned int value, int type){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],long value, int type){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],unsigned long value, int type){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+		void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],float value, int type){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[],double value, int type){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value,type);
+			ptLogSer->print(tail);
+		}
+	}
+
+	void Logger::printLog(LevelValue level,const char* sender,const int lineNb ,const char* title,const char tail[], Printable& value){
+		if (level<=mRequieredLevel&&ptLogSer!=NULL){
+			headerLog(sender,lineNb,title);
+			ptLogSer->print(value);
+			ptLogSer->print(tail);
+		}
+	}
+
+	void Logger::headerLog(const char* sender,const int lineNb ,const char* title){
+		ptLogSer->println();
+			ptLogSer->print(SEP1);
+			//#define WITH_PATH
+#ifdef WITH_PATH
+			ptLogSer->print(sender);
+#endif
+#ifndef  WITH_PATH
+			{
+				String sTmp=(String) sender;
+				int pos=sTmp.lastIndexOf('/');
+			//	ptLogSer->print("pos =");
+			//	ptLogSer->print(pos);
+				if(pos>=0){
+					ptLogSer->print(sTmp.substring(pos+1));
+				}
+				else{
+					ptLogSer->print(sender);
+				}
+			}
+
+#endif
+			ptLogSer->print(" line : ");
+			ptLogSer->print(lineNb);
+			ptLogSer->print(SEP1);
+			ptLogSer->print(title);
+			ptLogSer->print(SEP2);
+	}

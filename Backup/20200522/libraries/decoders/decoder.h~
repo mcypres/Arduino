@@ -1,0 +1,58 @@
+#include <EEPROM.h>
+#define ENTETE_COMMANDE "$"
+#define LG_ENTETE_COMMANDE 1
+#define SEP ","
+#define NB_PARAM 3
+
+String inData;
+struct IniField{
+  float x;
+  float y;
+  float z;
+};
+union EepromBuff{
+  IniField ini;
+  byte byteBuffer[sizeof(IniField)];
+  float vect[3];
+};// eepromBuff;
+
+ class decoder{
+	public: EepromBuff  eepromBuff;
+	public: decoder(){
+	}
+	public: void decodeCommande(String msg){
+	int startPos=0;
+	int endPos=0;
+	for(int i=0; i<3;i++){
+		endPos=msg.indexOf(SEP,startPos);
+		if(endPos<0){
+			endPos=msg.length();
+		} 
+		Serial.print("msg.substring(");
+		Serial.print(startPos);
+		Serial.print(",");
+		Serial.println(endPos);
+		Serial.println(") = ");
+		Serial.println(msg.substring(startPos,endPos));          
+		eepromBuff.vect[i]=msg.substring(startPos,endPos).toFloat();
+		startPos=endPos+1;
+	}
+	myEepromSrtream.writeEewriprom( &eepromBuff);
+	Serial.println(toString());
+
+
+	/**************************************************/
+	String toString( EepromBuff* in){
+	  String rep="";
+	  rep +="\n x= " +String(in->ini.x);
+	  rep +="\t y= " +String(in->ini.y);
+	  rep +="\t z= "+String(in->ini.z);
+	  return rep;
+	}
+	/**************************************************/
+	String toString(){
+	  EepromBuff in= myEepromSrtreamreadEeprom();
+	  Serial.println(toString(&in));
+	  return toString(&in);
+	}
+};

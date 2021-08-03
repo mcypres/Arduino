@@ -1,0 +1,15 @@
+#include "Arduino.h"
+#include"Logger.h"
+#define TIME_OUT 1500
+
+class DigitalOutput {
+private:
+	int * mPortList;
+	long * mTimeout;
+	int mNbPort; 
+public:
+	DigitalOutput(int nbPort,int * portList);
+	void refresh();
+	void write(String msg);
+	~DigitalOutput();
+};

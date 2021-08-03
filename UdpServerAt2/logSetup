@@ -1,0 +1,84 @@
+r
+OK
+> 
+hello
+
+SEND OK
+
+setup Start
+sended AT+RST
+received :AT+RST
+
+
+OK
+
+ ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x40100000, len 816, room 16 
+tail 0
+chksum 0x8d
+load 0x3ffe8000, len 788, room 8 
+tail 12
+chksum 0xcf
+ho 0 tail 12 room 4
+load 0x3ffe8314, len 288, room 12 
+tail 4
+chksum 0xcf
+csum 0xcf
+
+2nd boot version : 1.2
+  SPI Speed      : 40MHz
+  SPI Mode       : QIO
+  SPI Flash Size : 4Mbit
+jump to run user1
+
+sl�B�
+Ai-Thinker Technology Co. Ltd.
+
+invalid
+
+sdended AT+CWMODE=3
+received :AT+CWMODE=3
+
+
+OK
+
+AT+CWJAP="wifitelsur_MWAC","0019C70D4077X"
+received :AT+CWJAP="wifitelsur_MWAC","0019C70D4077X"
+
+
+send  AT+CIFSR
+received :
+OK
+AT+CIFSR
+
++CIFSR:APIP,"192.168.4.1"
++CIFSR:APMAC,"1a:fe:34:f3:02:e0"
++CIFSR:STAIP,"190.95.119.23"
++CIFSR:STAMAC,"18:fe:34:f3:02:e0"
+
+OK
+
+send  AT+CIPMUX=1
+received :AT+CIPMUX=1
+
+
+OK
+
+send  AT+CIPSTART=4,"UDP","192.168.4.2",5416,5416,0
+received :AT+CIPSTART=4,"UDP","192.168.4.2",5416,5416,0
+
+4,CONNECT
+
+OK
+
+sended AT+CIPSTATUS
+received :AT+CIPSTATUS
+
+STATUS:2
++CIPSTATUS:4,"UDP","192.168.4.2",5416,5416,0
+
+OK
+
+setup end

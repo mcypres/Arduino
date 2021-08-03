@@ -1,0 +1,23 @@
+#ifndef ASYNCR_SERIAL_H
+#define ASYNCR_SERIAL_H
+
+#include <Arduino.h>
+#include "Logger.h"
+#define INPUT_BUFF_SIZE 203
+
+class AsyncrSerial {
+private:
+	
+	HardwareSerial* ptSerPort;
+	bool isValidData;
+	Logger *myLogger;
+	char inputBuff[INPUT_BUFF_SIZE];	
+	int buffPos=0;
+public:
+	AsyncrSerial(HardwareSerial* serPort,Logger* myLogger);
+	char * getMessage();
+	bool GetIsValidData();
+
+
+};
+#endif

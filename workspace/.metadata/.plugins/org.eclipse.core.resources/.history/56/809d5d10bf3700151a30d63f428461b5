@@ -1,0 +1,27 @@
+/*
+ * SensorBmp183.cpp
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#include "SensorBmp183.h"
+
+SensorBmp183::SensorBmp183() {
+	// TODO Auto-generated constructor stub
+
+}
+String SensorBmp183::ToString(){
+
+}
+String SensorBmp183::ToNmea(){
+
+}
+void SensorBmp183::getData(){
+
+}
+
+SensorBmp183::~SensorBmp183() {
+	// TODO Auto-generated destructor stub
+}
+

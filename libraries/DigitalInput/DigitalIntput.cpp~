@@ -1,0 +1,87 @@
+#include "DigitalInput.h"
+
+#define NMEA_BLI_MSG "$PABLI,0,c,c,c,c,c,c,c,c*     "
+//********************0123456789012345678901234567890
+#define GROUP_OFFSET 7
+#define VALUE_OFFSET 9
+#define CHECKSUM_OFFSET 25
+#define MSG_LENGTH_T_CHECKSUM 23
+
+DigitalInput::DigitalInput(HardwareSerial *ptOutputSer,Logger *myLogger,int nbPort,int * portList,int GroupNumber):Sensor(ptOutputSer,myLogger){
+	this->myLogger=myLogger;
+	mNbPort=nbPort;
+	mPortList=portList;
+	mGroupNumber=GroupNumber;
+	boolean *mportState;
+	mportState=(boolean*)malloc(nbPort*sizeof(mportState[0])+1);
+	//mTimeout=new long(nbPort);
+	for(int  i=0;i<mNbPort;i++){
+      pinMode(mPortList[i], INPUT);
+     
+     }
+}
+
+DigitalInput::~DigitalInput(){
+	if (mportState!=NULL) delete mportState;
+};
+
+void DigitalInput::getData(){
+  //ptLogSer->println(F("DigitalInput::getData()"));
+  
+  mPortsValues=0;
+  
+  //ptLogSer->print(F("mNbPort "));
+  //ptLogSer->println(mNbPort);
+  
+  _LOG_PRINT(D,F("mNbPort "),mNbPort);
+  for(int numPort=0;numPort<mNbPort;numPort++){
+  	// mPortsValues=mPortsValues<<1;
+  	/* ptLogSer->print(F("mPortList[numPort] "));
+  	 ptLogSer->println(mPortList[numPort]);*/
+
+  	mportState[numPort]=digitalRead(mPortList[numPort]);
+	/*if(mportState[numPort]==true){		
+		mPortsValues++;
+    } */   
+  }
+  //ptLogSer->println(F("DigitalInput::getData() end"));
+  
+  _LOG_PRINT(D,F("DigitalInput::getData() end"),"");
+}
+
+unsigned long DigitalInput::getValue(){
+ 	 getData();
+	return mPortsValues;
+}
+String DigitalInput::toString(){ 
+	getData();
+	String rep="";
+	for(int numPort=0;numPort<mNbPort;numPort++){
+		rep =rep + "port :"+ mPortList[numPort] + " : " + mportState[numPort] + "\n";
+	}
+	return rep;
+}
+char* DigitalInput::toNmea(){
+	_LOG_PRINT(D,F("DigitalInput::toNmea()"),"");
+	static char msg[]=NMEA_BLI_MSG;
+	//char msg[]=F("$PABLI,0,c,c,c,c,c,c,c,c*     ");
+	int pos=VALUE_OFFSET;
+	msg[GROUP_OFFSET]=char(mGroupNumber);
+	getData();
+	for(int numPort=0;numPort<mNbPort;numPort++){
+		if(mportState[numPort]==true){
+			msg[pos]='T';
+	  	}
+	  	else{
+	  		msg[pos]='F';
+	  	}
+	  	pos+=2;
+	  	return msg;
+	}
+	checksum((unsigned char *) msg,msg+CHECKSUM_OFFSET,MSG_LENGTH_T_CHECKSUM);
+	//ptLogSer->println(msg);
+	
+	_LOG_PRINT(D,F("toNmea return"),msg);
+	
+	ptOutputSer->println(msg);
+}

@@ -1,0 +1,21 @@
+/*
+ * A.cpp
+ *
+ *  Created on: 4 août 2015
+ *      Author: marc
+ */
+
+#include "A.h"
+
+namespace sensors {
+
+A::A() {
+	// TODO Auto-generated constructor stub
+
+}
+
+A::~A() {
+	// TODO Auto-generated destructor stub
+}
+
+} /* namespace sensors */

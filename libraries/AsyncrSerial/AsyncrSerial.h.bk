@@ -1,0 +1,20 @@
+#ifndef ASYNCR_SERIAL_H
+#define ASYNCR_SERIAL_H
+
+#include <Arduino.h>
+#include "Logger.h"
+
+class AsyncrSerial {
+private:
+	String inputBuff="";
+	HardwareSerial* ptSerPort;
+	bool isValidData;
+	Logger *myLogger;
+public:
+	AsyncrSerial(HardwareSerial* serPort,Logger* myLogger);
+	String * getMessage();
+	bool GetIsValidData();
+
+
+};
+#endif

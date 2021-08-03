@@ -1,0 +1,19 @@
+/*
+ * SensorBmp183.h
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#ifndef SENSORBMP183_H_
+#define SENSORBMP183_H_
+
+#include "Sensor.h"
+
+class SensorBmp183: public Sensor {
+public:
+	SensorBmp183();
+	virtual ~SensorBmp183();
+};
+
+#endif /* SENSORBMP183_H_ */

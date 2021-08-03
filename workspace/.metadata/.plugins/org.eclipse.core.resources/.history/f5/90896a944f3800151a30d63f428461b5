@@ -1,0 +1,34 @@
+/*
+ * SensorBmp183.h
+ *
+ *  Created on: 31 juil. 2015
+ *      Author: marc
+ */
+
+#ifndef SENSORBMP183_H_
+#define SENSORBMP183_H_
+
+#include "Sensor.h"
+#include <Wire.h>
+#include <Adafruit_BMP085.h>
+#include <stdio.h>
+
+#define BARO_TIME_INTERVAL 1000
+
+
+class SensorBmp183: public Sensor {
+public:
+	SensorBmp183();
+	String ToString()=0;
+	String ToNmea()=0;
+	void getData()=0;
+
+	virtual ~SensorBmp183();
+private:
+	Adafruit_BMP085 bmp;
+	float pression,temperature;
+	unsigned long lastTime=0;
+
+};
+
+#endif /* SENSORBMP183_H_ */

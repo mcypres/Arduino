@@ -1,0 +1,19 @@
+//The setup function is called once at startup of the sketch
+#include "SensorBmp183.h"
+SensorBmp183* myBaro;
+void setup()
+{
+	  Serial3.begin(9600);    // Bluetooth
+	  Serial2.begin(4800);    // NMEA
+	  //Serial1.begin(4800);    // Seatalk
+	  Serial.begin(9600);     // USB
+
+	 myBaro= new SensorBmp183();
+}
+
+// The loop function is called in an endless loop
+void loop()
+{
+//Add your repeated code here
+	myBaro->getData();
+}
